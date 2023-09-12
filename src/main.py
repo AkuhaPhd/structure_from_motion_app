@@ -1,16 +1,24 @@
-# This is a sample Python script.
+"""Main sfm module, usage: $python3 ./src/main.py"""
+import numpy as np
+from scene_reconstruction.scene_3d import SceneReconstruction3D
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Add argparser for folder to image pair
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def main():
+    K = np.array([[2759.48/4, 0, 1520.69/4, 0, 2764.16/4, 1006.81/4, 0, 0, 1]]).reshape(3, 3)
+    d = np.array([0.0, 0.0, 0.0, 0.0, 0.0]).reshape(1, 5)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    scene = SceneReconstruction3D(K, d)
+    scene.load_image_pair("./data/P1060102.JPG", "./data/P1060103.JPG")
+    scene.plot_optic_flow()
+    scene.draw_epipolar_lines()
+    scene.plot_rectified_stereo_images()
+
+    # scene.plot_point_cloud()
+    # Todo
+
+
+if __name__ == "__main__":
+    main()
+
