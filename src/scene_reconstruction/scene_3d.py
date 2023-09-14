@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from scene_3d_utils import draw_lines
+from scene_reconstruction.scene_3d_utils import draw_lines
 
 
 class SceneReconstruction3D:
